@@ -25,9 +25,9 @@ def run():
     )
 
 
-st.markdown('## Summary', unsafe_allow_html=True)
-st.info('''
+    st.markdown('## Summary', unsafe_allow_html=True)
+    st.info('''
     - Entry-level research scientist in theoretical physics and gravity/condensed matter theory duality expertise.
     - With a wealth of experience in both working and residing in diverse cultural environments.
     - test3.
-''')
+    ''')
