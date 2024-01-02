@@ -24,17 +24,5 @@ def run():
         page_icon="👋",
     )
 
-    st.write("# Welcome to My Streamlit! 👋")
-
-    st.sidebar.success("Select a demo above.")
-
-    st.markdown(
-        """
-        This is my first Streamlit, the purpose is to make my portfolio which contains detailed projects.
-        ### Where can know me?
-        - Check out [Linked In ](www.linkedin.com/in/sukrakarn)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-    """
+   
     )
