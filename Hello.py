@@ -109,6 +109,19 @@ def txt4(a, b, c):
   with col3:
     st.markdown(c)
 
+#####################
+st.markdown('''
+## Work Experience
+''')
+
+txt('**Theoretical Physics Research Scientist**, String and Manybodys Group, Faculty of Natural Sciences, Hanyang University, Republic of Korea',
+'2023-2024')
+st.markdown('''
+- Conducted and published academic research that fulfills a way to understand solid-state physics which had been mysterious for  ` 20` years.
+- Played a key role in the success of the group's groundbreaking research project on the physics frontier of topology, which resulted in significant funding from the Korean government.
+- Optimized complex computations, an integrated approach was developed utilizing the programming languages `Wolfram Mathematica`, `Python`, and `Julia`. This resulted in a significant improvement, with numerical calculations being approximately  ` 1000` times faster than the original method.
+- Develop numerical/analytical calculations and machine learning to solve systems of non-linear `3 and more ` coupled differential equations.
+''')
 
 #####################
 st.markdown('''
@@ -131,22 +144,7 @@ st.markdown('''
  - Best Senior Project Award, The 12th Senior Research Project Competition, organized by the Thai Physics Society.
 ''')
 
-#####################
-st.markdown('''
-## Work Experience
-''')
-
-txt('**Theoretical Physics Research Scientist**, String and Manybodys Group, Faculty of Natural Sciences, Hanyang University, Republic of Korea',
-'2023-2024')
-st.markdown('''
-- Conducted and published academic research that fulfills a way to understand solid-state physics which had been mysterious for  ` 20` years.
-- Played a key role in the success of the group's groundbreaking research project on the physics frontier of topology, which resulted in significant funding from the Korean government.
-- Optimized complex computations, an integrated approach was developed utilizing the programming languages `Wolfram Mathematica`, `Python`, and `Julia`. This resulted in a significant improvement, with numerical calculations being approximately  ` 1000` times faster than the original method.
-- Develop numerical/analytical calculations and machine learning to solve systems of non-linear `3 and more ` coupled differential equations.
-''')
-
-
-
+####################
 
 #####################
 st.markdown('''
