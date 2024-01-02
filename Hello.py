@@ -31,12 +31,13 @@ def run():
 st.write("# Welcome to My Portfolio  ! 👋")
 
 st.write('''
-# Supalert Sukrakarn, M.Sc. st.latex(r'''
+# Supalert Sukrakarn, M.Sc. 
+''')
+st.latex(r'''
     a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
     \sum_{k=0}^{n-1} ar^k =
     a \left(\frac{1-r^{n}}{1-r}\right)
     ''')
-''')
 
 image = Image.open('image.png')
 st.image(image, width=250)
