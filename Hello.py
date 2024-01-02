@@ -14,6 +14,9 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
+from PIL import Image
+
+
 
 LOGGER = get_logger(__name__)
 
@@ -23,10 +26,12 @@ def run():
         page_title="Hello",
         page_icon="👋",
     )
+st.write("# Welcome to My Portfolio  ! 👋")
 
+st.sidebar.success("Select a section above.")
 
-    st.markdown('## Summary', unsafe_allow_html=True)
-    st.info('''
+st.markdown('## Summary', unsafe_allow_html=True)
+st.info('''
     - Entry-level research scientist in theoretical physics and gravity/condensed matter theory duality expertise.
     - With a wealth of experience in both working and residing in diverse cultural environments.
     - test3.
