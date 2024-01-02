@@ -132,7 +132,7 @@ st.markdown('''
 ## Work Experience
 ''')
 
-txt('**Full-Time Researcher**, String and Manybodys Research Group, Faculty of Natural Sciences, Hanyang University, Republic of Korea',
+txt('**Theoretical Physics Research Scientist**, String and Manybodys Group, Faculty of Natural Sciences, Hanyang University, Republic of Korea',
 '2023-2024')
 st.markdown('''
 - Conducted and published academic research that fulfills a way to understand solid-state physics which had been mysterious for  ` 20` years.
