@@ -29,6 +29,13 @@ def run():
     
 st.write("# Welcome to My Portfolio  ! 👋")
 
+st.write('''
+# Supalert Sukrakarn, M.Sc.
+''')
+
+image = Image.open('image.png')
+st.image(image, width=250)
+
 st.sidebar.success("Select a section above.")
 
 st.markdown('## Summary', unsafe_allow_html=True)
