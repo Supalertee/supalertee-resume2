@@ -38,7 +38,3 @@ def run():
           Dataset](https://github.com/streamlit/demo-self-driving)
     """
     )
-
-
-if __name__ == "__main__":
-    run()
