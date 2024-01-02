@@ -26,6 +26,7 @@ def run():
         page_title="Hello",
         page_icon="👋",
     )
+    
 st.write("# Welcome to My Portfolio  ! 👋")
 
 st.sidebar.success("Select a section above.")
