@@ -14,3 +14,20 @@ st.markdown('''Holography is a principle that state that weakly interacting clas
     in $n$ dimensions. Now it is natural to be asked by people "why we need this". The answer is very simple, it is because we cannot \
             solve strongly coupling quantum systems easily, while strongly coupling quantum systems have several extraordinary properties and features, which\
                 might become a part of next generation tenmologies. For example, `superconductivity, Mott insulator, Weyl semimetals, flat-band`, and so-on''')
+
+st.title('How I study strongly correlated quantum systems via gravity')
+st.markdown(''' What we done in a simple word is applying calculus of variations to optimize an dynamical variable called Action, \
+                in physical principle everythings in the universe in classical level (non-quantum) will behave along the lowest-action path.\
+                every formula in physics on high-school or college are derived by this principle  ''')
+
+
+st.latex(r'''
+    \begin{align}
+    S_{total} &= S_\psi +S_{bdy}+S_{g,\Phi} +S_{int},\\
+    S_\psi &= \int d^{5}x \sum_{j=1}^2 \sqrt{-g}~ \bar\psi^{(j)}\Big(\frac1{2} \Gamma^M({\overrightarrow{D}_M-\overleftarrow{D}_M})-m^{(j)}\Big)\psi^{(j)}, \\
+    S_{g,\Phi} &= \int d^{5}x \sqrt{-g}\Big(R-2\Lambda + |D_M\Phi_I|^2-m^2_{\Phi}|\Phi|^2\Big),\\
+    S_{bdy} &= \frac{i}{2} \int_{bdy} d^4x \sqrt{-h} \Big(\bar{\psi}^{(1)}\psi^{(1)}\pm \bar{\psi}^{(2)}\psi^{(2)}\Big),\\
+    S_{int} &= \int d^{5}x \sqrt{-g} \Big(\bar\psi^{(1)}\Phi\cdot\Gamma \psi^{(2)}+h.c \Big)
+    \end{align}
+    ''')
+
