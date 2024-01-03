@@ -150,6 +150,7 @@ st.markdown('''
 ## Hand on Academic projects
 ''')
 txt2('ABCpred', 'http://codes.bio/abcpred/')
+txt3('testpush','exe')
 
 
 
@@ -157,12 +158,11 @@ txt2('ABCpred', 'http://codes.bio/abcpred/')
 st.markdown('''
 ## Skills
 ''')
-txt3('Programming', '`Python`, `R`, `Linux`')
-txt3('Data processing/wrangling', '`SQL`, `pandas`, `numpy`')
-txt3('Data visualization', '`matplotlib`, `seaborn`, `plotly`, `altair`, `ggplot2`')
+txt3('Programming', '`Python`, Wolfram')
+txt3('Data processing', '`SQL`, `pandas`, `numpy`')
+txt3('Data visualization', '`matplotlib`, `seaborn`, `plotly`, Mathematica')
 txt3('Machine Learning', '`scikit-learn`')
 txt3('Deep Learning', '`TensorFlow`')
-txt3('Web development', '`Flask`, `HTML`, `CSS`')
 txt3('Model deployment', '`streamlit`, `gradio`, `R Shiny`, `Heroku`, `AWS`, `Digital Ocean`')
 
 #####################
