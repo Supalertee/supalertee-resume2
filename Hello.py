@@ -47,7 +47,6 @@ st.markdown('## Summary', unsafe_allow_html=True)
 st.info('''
     - Entry-level research scientist in theoretical physics and gravity/condensed matter theory duality expertise.
     - With a wealth of experience in both working and residing in diverse cultural environments.
-    - test3.
     ''')
 
 st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
@@ -141,7 +140,7 @@ txt('**Bachelors of Science** (Physics), *Mahidol University*, Thailand',
 st.markdown('''
 - GPA: `3.39`
 - Research thesis entitled `Perturbative Quantum Gravity with Application in Dark Matter Annihilation`.
- - Best Senior Project Award, The 12th Senior Research Project Competition, organized by the Thai Physics Society.
+- Best Senior Project Award, The 12th Senior Research Project Competition, organized by the Thai Physics Society.
 ''')
 
 ####################
@@ -150,7 +149,7 @@ st.markdown('''
 st.markdown('''
 ## Hand on Academic projects
 ''')
-txt4('ABCpred', 'A web server for the discovery of acetyl- and butyryl-cholinesterase inhibitors', 'http://codes.bio/abcpred/')
+txt2('ABCpred', 'http://codes.bio/abcpred/')
 
 
 
