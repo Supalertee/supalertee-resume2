@@ -86,7 +86,7 @@ def txt(a, b):
     st.markdown(b)
 
 def txt2(a, b):
-  col1, col2 = st.columns([1,4])
+  col1, col2 = st.columns([4,4])
   with col1:
     st.markdown(f'`{a}`')
   with col2:
@@ -149,8 +149,8 @@ st.markdown('''
 st.markdown('''
 ## Hand on Academic projects
 ''')
-txt2('ABCpred', 'http://codes.bio/abcpred/')
-txt2('testpush','exe')
+txt2('Ginzburg-Landau-Wilson theory for strongly correlated systems II: analytic and backreacted results', 'https://doi.org/10.48550/arXiv.2311.01897' )
+txt2('Photon Signal from Non-interacting Scalar Dark Matter Annihilation','https://iopscience.iop.org/article/10.1088/1742-6596/1380/1/012040')
 
 
 
