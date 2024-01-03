@@ -13,4 +13,4 @@ st.markdown(''' The main problem is that the gravity and quantum physics are bui
 st.markdown('''Holography is a principle that state that weakly interacting classical gravitational gravity in $n+1$ dimensions is equivelent to strongly coupling quantum theory.\
     in $n$ dimensions. Now it is natural to be asked by people "why we need this". The answer is very simple, it is because we cannot \
             solve strongly coupling quantum systems easily, while strongly coupling quantum systems have several extraordinary properties and features, which\
-                might become a part of next generation tenmologies. For example, superconductivity, Mott insulator, Weyl semimetals, flat-band, and so-on''')
+                might become a part of next generation tenmologies. For example, `superconductivity, Mott insulator, Weyl semimetals, flat-band`, and so-on''')
