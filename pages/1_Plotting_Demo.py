@@ -13,26 +13,30 @@
 # limitations under the License.
 
 import time
-
 import numpy as np
-
+from scipy.integrate import odeint
 import streamlit as st
 from streamlit.hello.utils import show_code
 
 
+def x_derivatives(x, t):
+    return [x[1],-x[0]*1000]
+t = np.arange(0, 0.5, 0.5/100)
+x =  odeint(x_derivatives, [0, 1], t).T[0]
+
 def plotting_demo():
     progress_bar = st.sidebar.progress(0)
     status_text = st.sidebar.empty()
-    last_rows = np.random.randn(1, 1)
+    last_rows = np.array([[x[0]]])
     chart = st.line_chart(last_rows)
 
-    for i in range(1, 101):
-        new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
+    for i in range(1, len(t)):
+        new_rows = np.array([[x[i]]])
         status_text.text("%i%% Complete" % i)
         chart.add_rows(new_rows)
         progress_bar.progress(i)
         last_rows = new_rows
-        time.sleep(0.05)
+        time.sleep(0.005)
 
     progress_bar.empty()
 
