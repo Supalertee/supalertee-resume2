@@ -38,8 +38,11 @@ st.latex(r'''
     G_{\mu\nu} = gT_{\mu\nu}
     ''')
 
-image = Image.open('image.png')
-st.image(image, width=250)
+st.image('image.png', output_format="PNG", use_column_width='auto')
+
+sidebarlogo = Image.open('image.png').resize((250, 250))
+st.image(sidebarlogo, use_column_width='auto')
+
 
 st.sidebar.success("Select a section above.")
 

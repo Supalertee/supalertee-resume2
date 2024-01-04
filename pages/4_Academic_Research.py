@@ -4,6 +4,7 @@ import numpy as np
 from scipy.integrate import odeint
 import streamlit as st
 from streamlit.hello.utils import show_code
+from PIL import Image
 
 
 def xSHM(x, t):
@@ -111,3 +112,7 @@ st.latex(r'''
     \end{align}
     ''')
 
+st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
+            32 spectral functions which contain different symmetry and features.''')
+
+st.image('ClassifiedTable.png', output_format="PNG")
