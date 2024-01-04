@@ -112,6 +112,34 @@ st.latex(r'''
     \end{align}
     ''')
 
+st.markdown(''' From these actions, we can derive equation of motions and apply Holographic principle. The main information we extracted from this model is\
+a mathematical object so called **_Green's function_**. In mathematical sence, the Green's function is just a tool to solve differential\
+equation. However, in physical sence, the Green's function contains the information showing that how particles correlate to each other. \
+To show the properties of the matter, we can calculate **_Spectral functions_**, which is define as imaginary part of the Green's function''')
+
+st.latex(r'''A(\omega,k) = \text{Tr}[\text{Im}(G(\omega,k))]''')
+
+st.markdown(''' So, the main question is how can we calculate the Green's function? The answer is conceptually simple, we just apply the least-action principle to find\
+the saddle point of the action to get the system of equations of motion. After solving the system of equations of motion, we can apply the Holographic principle \
+and calculate the Green's functions. However, the calculation is really **_non-trivial_** due to complexity of the system of differential equations and most of researh\
+in gauge/gravity duality usully done by numerical calculation approch.
+
+Lovely!,, my team and I can find the way to get analytic results! Simply speaking, we get the exact formula of all spectral functions. This result reduce time \
+     we use to solve the spectral function from ` hours / 1 set of parameter ` to `half second`. Additionally, the exact formulas are intutive \
+        and can tell use everything that have been hidden in numerical results.''')
+
+st.header('Example: Green Functions of Flat-Band')            
+
+st.markdown(''' By consider tensor type of interaction, we found the flat-band with rotational symmetry. The Green's function looks very intutive and symmetric as follow''')
+
+st.latex(r'''
+\begin{align*}
+\text{Tr}\mathbb{G}_{B_{x}^{(0)}}^{(SA)}  &= \frac{2\omega}{b}\Big[\frac{ (b+k_x)\sqrt{(b - k_x)^2 +\boldsymbol{k}_\perp^2-\omega^2} +(b-k_x)\sqrt{(b + k_x)^2 +\boldsymbol{k}_\perp^2-\omega^2} }{\boldsymbol{k}_\perp^2 - \omega^2}\Big]
+\end{align*} ''')
+
+st.markdown(''' As everyone knows, how to best way to communicate and send the message to the world is **_Visualization_**\
+        and this ''')
+
 st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
             32 spectral functions which contain different symmetry and features.''')
 

@@ -34,10 +34,6 @@ st.write('''
 # Supalert Sukrakarn, M.Sc. 
 ''')
 
-st.latex(r'''
-    G_{\mu\nu} = gT_{\mu\nu}
-    ''')
-
 st.image('image.png', output_format="PNG")
 
 
