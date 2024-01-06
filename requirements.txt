@@ -3,14 +3,4 @@ numpy
 pandas
 pydeck
 streamlit
-# scipy
-# tqdm
-# matplotlib
-# seaborn
-# requests
-# geopandas
-# os
-# geodatasets
-# pmdarima
-# sklearn
-# plotly
+scipy
