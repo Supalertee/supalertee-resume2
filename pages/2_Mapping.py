@@ -9,7 +9,7 @@ import geopandas as gpd
 import os
 import zipfile
 from pmdarima import auto_arima
-
+import time 
 from sklearn.metrics import r2_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
@@ -31,7 +31,7 @@ st.markdown(''' As a foreigner who living in Korea for 3.5 years, I realize that
     In quantitative research sense, we will see how pollution in Seoul change over years and will find the correlation to other factor, weather, people's activities\
     and so-on. To answer the question **_How pollution in Seoul behave quantitatively and what are the causes?_**''')
 
-st.markdown("# Data Collection/Cleaning")
+st.markdown("# Data Collection/Cleaning/Exploratory")
 st.markdown(''' Since pollution is the main problem nowadays, I can find very good sources of South Korea pollution data. So, I decided to select 2 dataset''')
 
 zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
@@ -49,14 +49,85 @@ st.code(datareading, language='python')
 
 st.markdown(''' We found that the data is collected very hours and also contain detailed address and measured pollution in specific unit\
      the first 10 row of data is given as follows''')
-st.dataframe(Seoul.head(10))
+
+st.dataframe(Seoul.head(5))
+
 
 st.markdown(''' To perform exploratory data analysis, one can see that detailed Address and measuring time are too exceed. What we can do first to explore the data\
-     is reducing the problem by considering just district and average over a year of polutions (data provide just 3 years), which the code is shown as follows ''')
+     is reducing the problem by considering just district and average over a year of polutions (data provide just 3 years). ''')
 # st.markdowm(''' We first normalize data for each column to simple ''')
 # unlike in Jupiter .groupby('').mean() in streamlit is require one culumns. So, I decited to droup all important column
 
+def SeoulModify():
+    Seoulmod = Seoul.copy()
+    Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,4)
+    Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
+    Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
 
+    Seoulmodoverall =Seoulmod.drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+    Seoulmod2017=Seoulmod[Seoulmod["Measurement date"]=="2017"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+    Seoulmod2018=Seoulmod[Seoulmod["Measurement date"]=="2018"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+    Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+    return Seoulmodoverall,Seoulmod2017,Seoulmod2018,Seoulmod2019
+
+st.markdown('''**_Now we get more clean dataset in the absence of unnesscary data for now_**''')
+
+
+with st.spinner("Data is Cleaning"):
+    Seoulmodoverall,Seoulmod2017,Seoulmod2018,Seoulmod2019 = SeoulModify()
+    st.dataframe(Seoulmod2017.head(5))
+
+st.markdown(''' We now can map the pollution data onto each district and see the overall change over the years. In this work, I will use non-interactive map\
+    and the best package to do such thing is **_Geopandas_**, Since the geo.json file contain district, we can group data from our cleaned dataset into\
+        geometric file by grouping "Address". As a result, we can visualize the data on the Seoul's district as follows''')
+ 
+tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
+SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+maxdata=Seoulmodoverall.iloc[:,1:].max()
+mindata=Seoulmodoverall.iloc[:,1:].min()
+
+def plotgeo() :
+    f, axes = plt.subplots(figsize=(5, 5), ncols=4, nrows=3,layout="compressed")
+    SeoulGeo_pollution2017.plot(ax=axes[0][0], column='PM2.5', cmap='OrRd', legend=True, legend_kwds={"label": "PM2.5", "orientation": "horizontal"},vmin = mindata["PM2.5"],vmax = maxdata["PM2.5"])
+    SeoulGeo_pollution2017.plot(ax=axes[0][1], column='PM10', cmap='OrRd', legend=True, legend_kwds={"label": "PM10", "orientation": "horizontal"},vmin = mindata["PM10"],vmax = maxdata["PM10"])
+    SeoulGeo_pollution2017.plot(ax=axes[0][2], column='CO', cmap='OrRd', legend=True, legend_kwds={"label": "CO", "orientation": "horizontal"},vmin = mindata["CO"],vmax = maxdata["CO"])
+    SeoulGeo_pollution2017.plot(ax=axes[0][3], column='SO2', cmap='OrRd', legend=True, legend_kwds={"label": "SO2", "orientation": "horizontal"},vmin = mindata["SO2"],vmax = maxdata["SO2"])
+    SeoulGeo_pollution2018.plot(ax=axes[1][0], column='PM2.5', cmap='OrRd', legend=True, legend_kwds={"label": "PM2.5", "orientation": "horizontal"},vmin = mindata["PM2.5"],vmax = maxdata["PM2.5"])
+    SeoulGeo_pollution2018.plot(ax=axes[1][1], column='PM10', cmap='OrRd', legend=True, legend_kwds={"label": "PM10", "orientation": "horizontal"},vmin = mindata["PM10"],vmax = maxdata["PM10"])
+    SeoulGeo_pollution2018.plot(ax=axes[1][2], column='CO', cmap='OrRd', legend=True, legend_kwds={"label": "CO", "orientation": "horizontal"},vmin = mindata["CO"],vmax = maxdata["CO"])
+    SeoulGeo_pollution2018.plot(ax=axes[1][3], column='SO2', cmap='OrRd', legend=True, legend_kwds={"label": "SO2", "orientation": "horizontal"},vmin = mindata["SO2"],vmax = maxdata["SO2"])
+    SeoulGeo_pollution2019.plot(ax=axes[2][0], column='PM2.5', cmap='OrRd', legend=True, legend_kwds={"label": "PM2.5", "orientation": "horizontal"},vmin = mindata["PM2.5"],vmax = maxdata["PM2.5"])
+    SeoulGeo_pollution2019.plot(ax=axes[2][1], column='PM10', cmap='OrRd', legend=True, legend_kwds={"label": "PM10", "orientation": "horizontal"},vmin = mindata["PM10"],vmax = maxdata["PM10"])
+    SeoulGeo_pollution2019.plot(ax=axes[2][2], column='CO', cmap='OrRd', legend=True, legend_kwds={"label": "CO", "orientation": "horizontal"},vmin = mindata["CO"],vmax = maxdata["CO"])
+    SeoulGeo_pollution2019.plot(ax=axes[2][3], column='SO2', cmap='OrRd', legend=True, legend_kwds={"label": "SO2", "orientation": "horizontal"},vmin = mindata["SO2"],vmax = maxdata["SO2"])
+
+    for i, ax_row in enumerate(axes):
+        for j, ax in enumerate(ax_row):
+            ax.set_xticks([])
+            ax.set_yticks([])
+            
+            # Set title for the first column in each row
+            if j == 1:
+                ax.set_title("2017" if i == 0 else "2019", fontsize=16)
+    return f, axes
+
+
+with st.spinner("The Mapping plot is generating, please wait"):
+    f, axes = plotgeo()
+    st.pyplot(f)
+
+
+
+
+
+show_btn = st.button("Show code! (This might take few seconds)")
+if show_btn:
+    geocode = ''' tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
+SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
 Seoulmod = Seoul.copy()
 Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,4)
 Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
@@ -65,39 +136,7 @@ Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
 Seoulmodoverall =Seoulmod.drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
 Seoulmod2017=Seoulmod[Seoulmod["Measurement date"]=="2017"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
 Seoulmod2018=Seoulmod[Seoulmod["Measurement date"]=="2018"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
-Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
-
-SeoulModcode = ''' Seoulmod = Seoul.copy()
-Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,4)
-Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
-Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
-
-Seoulmodoverall =Seoulmod.drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
-Seoulmod2017=Seoulmod[Seoulmod["Measurement date"]=="2017"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
-Seoulmod2018=Seoulmod[Seoulmod["Measurement date"]=="2018"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
-Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index() '''
-st.code(SeoulModcode, language='python')
-
-st.markdown('''**_Now we get more clean dataset in the absence of unnesscary data for now_*''')
-st.dataframe(Seoulmod2017.head(10))
-
-st.markdown(''' We now can map the pollution data onto each district and see the overall change over the years. In this work, I will use non-interactive map\
-    and the best package to do such thing is **_Geopandas_**, Since the geo.json file contain district, we can group data from our cleaned dataset into\
-        geometric file by grouping "Address" ''')
- 
-tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
-SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-maxdata=Seoulmodoverall.iloc[:,2:].max()
-mindata=Seoulmodoverall.iloc[:,2:].min()
-
-geocode = ''' tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
-SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)'''
-
-st.code(geocode,language = 'python')
+Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index() 
 
 f, axes = plt.subplots(figsize=(5, 5), ncols=3, nrows=3,layout="compressed")
 SeoulGeo_pollution2017.plot(ax=axes[0][0], column='PM2.5', cmap='OrRd', legend=True, legend_kwds={"label": "PM2.5", "orientation": "horizontal"},vmin = mindata["PM2.5"],vmax = maxdata["PM2.5"])
@@ -118,8 +157,7 @@ for i, ax_row in enumerate(axes):
         if j == 1:
             ax.set_title("2017" if i == 0 else "2019", fontsize=16)
 
-st.pyplot(f)
-
-
+st.pyplot(f)'''
+    st.code(geocode,language = 'python')
 # test = pd.DataFrame(pollution)
 # st.dataframe(pollution)
