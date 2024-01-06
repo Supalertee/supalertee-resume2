@@ -8,5 +8,5 @@ seaborn
 geopandas
 matplotlib
 requests
-sklearn
+scikit-learn
 pmdarima
