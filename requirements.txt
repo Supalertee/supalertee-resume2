@@ -10,3 +10,4 @@ matplotlib
 requests
 scikit-learn
 pmdarima
+zipfile
