@@ -20,7 +20,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
 from plotly import graph_objects as go 
 
-pollution = pd.read_csv("/Users/art/Documents/GitHub/supalertee-resume2/projects/pollution/south-korean-pollution-data.csv")
+pollution = pd.read_csv("./projects/pollution/south-korean-pollution-data.csv")
 
 test = pd.DataFrame(pollution)
 st.dataframe(pollution)
