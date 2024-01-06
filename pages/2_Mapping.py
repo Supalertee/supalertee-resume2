@@ -17,7 +17,8 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
 
 # data reading/cleaning 
-pollution = pd.read_csv("./projects/pollution/Korea.zip")
+zf = zipfile.ZipFile('./projects/pollution/Korea.zip') 
+pollution = pd.read_csv(zf.open('Measurement_summary.csv'))
 
 test = pd.DataFrame(pollution)
 st.dataframe(pollution)
