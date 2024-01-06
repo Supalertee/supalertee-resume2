@@ -15,7 +15,8 @@ from sklearn.metrics import log_loss
 from sklearn.metrics import confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
 
-pollution = pd.read_csv("./projects/pollution/south-korean-pollution-data.csv")
+# data reading/cleaning 
+pollution = pd.read_csv("./projects/pollution/south-korean-pollution-data.zip",compression='zip')
 
 test = pd.DataFrame(pollution)
 st.dataframe(pollution)
