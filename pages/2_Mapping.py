@@ -14,7 +14,6 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
 from sklearn.metrics import confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
-from plotly import graph_objects as go 
 
 pollution = pd.read_csv("./projects/pollution/south-korean-pollution-data.csv")
 
