@@ -2,8 +2,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd 
-from tqdm import tqdm
-from tqdm.gui import tqdm as tqdm_gui
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests

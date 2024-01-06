@@ -8,3 +8,4 @@ seaborn
 geopandas
 matplotlib
 requests
+sklearn
