@@ -31,23 +31,33 @@ st.markdown(''' As a foreigner who living in Korea for 3.5 years, I realize that
     In quantitative research sense, we will see how pollution in Seoul change over years and will find the correlation to other factor, weather, people's activities\
     and so-on. To answer the question **_How pollution in Seoul behave quantitatively and what are the causes?_**''')
 
-st.markdown("# Data Collection")
+st.markdown("# Data Collection/Cleaning")
 st.markdown(''' Since pollution is the main problem nowadays, I can find very good sources of South Korea pollution data. So, I decided to select 2 dataset''')
 
-def datareading():
-    zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
-    pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
-    zf2 = zipfile.ZipFile('./projects/pollution/Seoul.zip') 
-    Seoul = pd.read_csv(zf2.open('Measurement_summary.csv'))
-    return pollution,Seoul
-show_code(datareading)
+zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
+pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
+zf2 = zipfile.ZipFile('./projects/pollution/Seoul.zip') 
+Seoul = pd.read_csv(zf2.open('Measurement_summary.csv'))
 
-pollution,Seoul = datareading()
-Seoulmod = Seoul.copy()
-st.dataframe(Seoulmod)
+datareading = '''zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
+pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
+zf2 = zipfile.ZipFile('./projects/pollution/Seoul.zip') 
+Seoul = pd.read_csv(zf2.open('Measurement_summary.csv'))
+'''
+st.code(datareading, language='python')
 
+
+st.markdown(''' We found that the data is collected very hours and also contain detailed address and measured pollution in specific unit\
+     the first 10 row of data is given as follows''')
+st.dataframe(Seoul.head(10))
+
+st.markdown(''' To perform exploratory data analysis, one can see that detailed Address and measuring time are too exceed. What we can do first to explore the data\
+     is reducing the problem by considering just district and average over a year of polutions (data provide just 3 years), which the code is shown as follows ''')
 # st.markdowm(''' We first normalize data for each column to simple ''')
 # unlike in Jupiter .groupby('').mean() in streamlit is require one culumns. So, I decited to droup all important column
+
+
+Seoulmod = Seoul.copy()
 Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,4)
 Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
 Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
@@ -56,17 +66,40 @@ Seoulmodoverall =Seoulmod.drop(["Measurement date"],axis=1).groupby('Address').m
 Seoulmod2017=Seoulmod[Seoulmod["Measurement date"]=="2017"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
 Seoulmod2018=Seoulmod[Seoulmod["Measurement date"]=="2018"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
 Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+
+SeoulModcode = ''' Seoulmod = Seoul.copy()
+Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,4)
+Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
+Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
+
+Seoulmodoverall =Seoulmod.drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+Seoulmod2017=Seoulmod[Seoulmod["Measurement date"]=="2017"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+Seoulmod2018=Seoulmod[Seoulmod["Measurement date"]=="2018"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index()
+Seoulmod2019=Seoulmod[Seoulmod["Measurement date"]=="2019"].drop(["Measurement date"],axis=1).groupby('Address').mean().reset_index() '''
+st.code(SeoulModcode, language='python')
+
+st.markdown('''**_Now we get more clean dataset in the absence of unnesscary data for now_*''')
+st.dataframe(Seoulmod2017.head(10))
+
+st.markdown(''' We now can map the pollution data onto each district and see the overall change over the years. In this work, I will use non-interactive map\
+    and the best package to do such thing is **_Geopandas_**, Since the geo.json file contain district, we can group data from our cleaned dataset into\
+        geometric file by grouping "Address" ''')
+ 
 tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
 SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
 SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
 SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
-
 maxdata=Seoulmodoverall.iloc[:,2:].max()
 mindata=Seoulmodoverall.iloc[:,2:].min()
 
+geocode = ''' tempSeoulGep=gpd.read_file("./projects/pollution/seoul_municipalities_geo.json")
+SeoulGeo_pollution2017= tempSeoulGep.merge(Seoulmod2017, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2018= tempSeoulGep.merge(Seoulmod2018, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)
+SeoulGeo_pollution2019= tempSeoulGep.merge(Seoulmod2019, left_on='SIG_ENG_NM', right_on='Address').drop("Address",axis=1)'''
 
+st.code(geocode,language = 'python')
 
-f, axes = plt.subplots(figsize=(8, 5), ncols=3, nrows=3,layout="compressed")
+f, axes = plt.subplots(figsize=(5, 5), ncols=3, nrows=3,layout="compressed")
 SeoulGeo_pollution2017.plot(ax=axes[0][0], column='PM2.5', cmap='OrRd', legend=True, legend_kwds={"label": "PM2.5", "orientation": "horizontal"},vmin = mindata["PM2.5"],vmax = maxdata["PM2.5"])
 SeoulGeo_pollution2017.plot(ax=axes[0][1], column='PM10', cmap='OrRd', legend=True, legend_kwds={"label": "PM10", "orientation": "horizontal"},vmin = mindata["PM10"],vmax = maxdata["PM10"])
 SeoulGeo_pollution2017.plot(ax=axes[0][2], column='CO', cmap='OrRd', legend=True, legend_kwds={"label": "CO", "orientation": "horizontal"},vmin = mindata["CO"],vmax = maxdata["CO"])
