@@ -4,3 +4,7 @@ pandas
 pydeck
 streamlit
 scipy
+seaborn
+geopandas
+matplotlib
+requests
