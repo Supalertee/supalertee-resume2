@@ -4,3 +4,14 @@ pandas
 pydeck
 streamlit
 scipy
+folium
+tqdm
+matplotlib
+seaborn
+requests
+geopandas
+os
+geodatasets
+pmdarima
+sklearn
+plotly
