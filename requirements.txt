@@ -10,3 +10,4 @@ geodatasets
 matplotlib
 requests
 sklearn
+pmdarima

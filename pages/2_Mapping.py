@@ -7,7 +7,6 @@ import seaborn as sns
 import requests
 import geopandas as gpd
 import os
-import geodatasets
 from pmdarima import auto_arima
 
 from sklearn.metrics import r2_score
