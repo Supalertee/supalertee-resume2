@@ -82,15 +82,16 @@ st.latex(r'''
 ''')
 st.sidebar.markdown("# Equations of motion")
 
-st.info(''' So, we obtain a **_differential equation_** called **_Equation of motions:_**  $\displaystyle\ddot{x} - \\frac{k}{m}x = 0$''')
+col1, col2 = st.columns(2)
 
-
-plotting(OS(xSHM))
-
-st.info(''' We are also able to modify our model by adding damping, which the **_equation of motions is given:_** $\displaystyle\ddot{x} - \
+with col1:
+    st.info(''' So, we obtain a **_differential equation_** called **_Equation of motions:_**  $\displaystyle\ddot{x} - \\frac{k}{m}x = 0$''')
+    plotting(OS(xSHM))
+with col2:
+    st.info(''' We are also able to modify our model by adding damping, which the **_equation of motions is given:_** $\displaystyle\ddot{x} - \
         \\frac{k}{m}x-b\dot{x} = 0$''')
+    plotting(OS(xdamp))
 
-plotting(OS(xdamp))
 
 st.markdown(''' On can see that the periodic moving appears in the solution of spring system which is well known. However, this simple classical physics\
             calculation have been discovered for almost 300 years and it is still working well. So, How is this simple concept applied in modern theoretical physics?''')
