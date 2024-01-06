@@ -6,7 +6,6 @@ streamlit
 scipy
 seaborn
 geopandas
-geodatasets
 matplotlib
 requests
 sklearn
