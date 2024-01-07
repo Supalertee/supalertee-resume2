@@ -354,5 +354,22 @@ with st.spinner("Training Model"):
     fig = plotfor(prediction25)
     st.pyplot(fig)
 
-st.markdown('''The first ML module I will use is <span style="color:blue">some *blue* text</span>.
-, which is the module for time-series forecasting. We first consider year-time scale. The result is given as follows''')
+st.markdown('''The first ML module I will use is auto_arima, which is a module for time-series forecasting. We first consider year-time scale. The result is given as follows''')
+
+Seoulmod = Seoul.copy()
+Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,10)
+Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
+Seoulmod=Seoulmod.drop(["Station code","Address","Latitude","Longitude"],axis=1).groupby(["Measurement date"]).mean().reset_index()
+
+
+def MLfor(Seoulmod1):
+    train_x=(Seoulmod1.reset_index())[["index"]]
+    train_y1= Seoulmod1["PM2.5"]
+    x_test = pd.DataFrame(np.arange(35,62))
+    x_test.index = np.arange(35,62)
+    modelpm25 = auto_arima(y = train_y1,X = train_x , m = 12)
+    prediction25= modelpm25.predict(n_periods= 27,X=x_test)
+    prediction25.index = Cleanpollution.iloc[71:98,0]
+    return prediction25
+
+st.markdown("Since the day-scaled data forcasting take to long time to train the model. So, I will not add the complied code in this app ")
