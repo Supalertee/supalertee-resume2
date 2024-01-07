@@ -253,7 +253,7 @@ def plot_air_quality(Seoulmod1):
 # Assuming Seoulmod1 is your DataFrame
 # Call the function to plot the air quality parameters
 
-st.subheader('EDA 2: Time Series Analysis')
+st.subheader('EDA 2: Time Series Analysis/ seasonal period evaluation')
 with st.spinner("The Mapping plot is generating, please wait"):
     f, axes = plot_air_quality(Seoulmod1)
     st.pyplot(f)
