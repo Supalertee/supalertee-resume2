@@ -291,13 +291,68 @@ st.latex(r''' \text{fit} = \text{shifting constant}+\cos(12 t  + \text{arbitrary
     \text{So, we will use this period in model construction.}''')
 
 st.markdown("# Model Selection/Training/Evaluation")
-st.markdown(''' Since we found the periodic osillating data, we select the time-series ML tools to predict the data. We first a little bit more clean\
-    the data by normalize it. This becuase we can compare our data with other dataset easily since they were collected in differnt unit and station''')
 
-def scaling(data):
-    scaled = preprocessing.MinMaxScaler().fit_transform(data)
-    return scaled
+pollutionmod=pollution[pollution["District"]=="Seoul"].drop("Unnamed: 0",axis=1)[::-1].reset_index().drop("index",axis=1)
+pollutionmod["date"]=pollutionmod["date"].str.replace("/", "-")
+temp=pollutionmod.copy()
+i=0
+while i < (pollutionmod.shape)[0]:
+    n = temp['date'][i].rfind("-")
+    pollutionmod.loc[i,'date'] = (temp['date'][i][0:n])
+    i=i+1
+i=0
+while i < (pollutionmod.shape)[0]:
+    if len(pollutionmod['date'][i]) <= 6:
+        pollutionmod.loc[i,'date']=pollutionmod.loc[i,'date'].replace("-","-0")
+        i=i+1
+    else:
+        i=i+1
 
-st.dataframe(scaling(Seoulmod1.iloc[:,1::]))
+Cleanpollution=pollutionmod.drop(["District","Country","Lat","Long"],axis=1)
+Cleanpollution=Cleanpollution.groupby(["City","date"]).mean().reset_index()
+Cleanpollution=Cleanpollution[Cleanpollution["City"]=="Nowon-Gu"].sort_values(by="date").reset_index(drop=True)
+Cleanpollution = Cleanpollution.reset_index()
+Cleanpollution=Cleanpollution.drop(["City","index"],axis=1).groupby(["date"]).mean().reset_index()
 
+def MLfor(Seoulmod1):
+    train_x=(Seoulmod1.reset_index())[["index"]]
+    train_y1= Seoulmod1["PM2.5"]
+    x_test = pd.DataFrame(np.arange(35,62))
+    x_test.index = np.arange(35,62)
+    modelpm25 = auto_arima(y = train_y1,X = train_x , m = 12)
+    prediction25= modelpm25.predict(n_periods= 27,X=x_test)
+    prediction25.index = Cleanpollution.iloc[71:98,0]
+    return prediction25
 
+def plotfor(predict):
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+    # Plotting with labels
+    line1, = ax1.plot(Seoulmod1["Measurement date"], Seoulmod1["PM2.5"], label='Dataset')
+    line2, = ax1.plot(predict, label='Machine Learning  Prediction')
+
+    # Specify the legends
+    legend1 = ax1.legend(handles=[line1], loc='upper left')
+    legend2 = ax1.legend(handles=[line2], loc='lower right')
+
+    # Add the legends to the plot
+    ax1.add_artist(legend1)
+    ax1.add_artist(legend2)
+
+    N = 7
+    ax1.set_xticks(Cleanpollution["date"][37::N])
+    ax1.set_xticklabels(Cleanpollution["date"][37::N], rotation=45, fontsize=9)
+    return fig
+
+plt.show()
+
+st.markdown('''The first ML module I will use is <span style="color:blue">some *blue* text</span>.
+, which is the module for time-series forecasting. We first consider year-time scale. The result is given as follows''')
+with st.spinner("Training Model"):
+    prediction25 = MLfor(Seoulmod1)
+    fig = plotfor(prediction25)
+    st.pyplot(fig)
+
+st.markdown('''The first ML module I will use is <span style="color:blue">some *blue* text</span>.
+, which is the module for time-series forecasting. We first consider year-time scale. The result is given as follows''')
