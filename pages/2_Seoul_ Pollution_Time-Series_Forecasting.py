@@ -12,6 +12,7 @@ import os
 import zipfile
 from pmdarima import auto_arima
 import time 
+from sklearn import preprocessing
 from sklearn.metrics import r2_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
@@ -216,8 +217,7 @@ st.info(''' From above data analysis, one can see that **_PM2.5_** is significan
 Seoulmod1 = Seoul.copy()
 Seoulmod1["Measurement date"]=Seoulmod1["Measurement date"].str.slice(0,7)
 Seoulmod1["Address"]=Seoulmod1["Address"].str.split(',').str[2].str.strip()
-Seoulmod1=Seoulmod1[Seoulmod1["Address"]=="Yangcheon-gu"].\
-groupby(["Measurement date","Station code","Address","Latitude","Longitude"]).mean().reset_index()
+Seoulmod1=Seoulmod1.drop(["Station code","Address","Latitude","Longitude"],axis=1).groupby(["Measurement date"]).mean().reset_index()
 
 def plot_air_quality(Seoulmod1):
     # Convert the "Measurement date" column to datetime
@@ -285,6 +285,19 @@ def cosfit():
 f,axes = cosfit()
 
 st.pyplot(f)
-st.info(''' We can see that the period of the data is approximatly 12 months, since we use the following cosine functions''')
+st.info(''' We can see that the period of the data is approximatly 12 months, since we use the following cosine functions. Not just only PM2.5 but also\
+    other pollution types.''')
 st.latex(r''' \text{fit} = \text{shifting constant}+\cos(12 t  + \text{arbitrary phase })\\
     \text{So, we will use this period in model construction.}''')
+
+st.markdown("# Model Selection/Training/Evaluation")
+st.markdown(''' Since we found the periodic osillating data, we select the time-series ML tools to predict the data. We first a little bit more clean\
+    the data by normalize it. This becuase we can compare our data with other dataset easily since they were collected in differnt unit and station''')
+
+def scaling(data):
+    scaled = preprocessing.MinMaxScaler().fit_transform(data)
+    return scaled
+
+st.dataframe(scaling(Seoulmod1.iloc[:,1::]))
+
+
