@@ -34,7 +34,7 @@ st.markdown(''' As a foreigner who living in Korea for 3.5 years, I realize that
     In quantitative research sense, we will see how pollution in Seoul change over years and will find the correlation to other factor, weather, people's activities\
     and so-on. To answer the question **_How pollution in Seoul behave quantitatively and what are the causes?_**''')
 
-st.markdown("# Data Collection/Cleaning/Exploratory")
+st.markdown("# Data Collection/Cleansing/Exploratory")
 st.markdown(''' Since pollution is the main problem nowadays, I can find very good sources of South Korea pollution data. So, I decided to select 2 dataset''')
 
 zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 

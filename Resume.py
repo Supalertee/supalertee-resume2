@@ -135,7 +135,6 @@ st.markdown('''
 txt('**Bachelors of Science** (Physics), *Mahidol University*, Thailand',
 '2015-2019')
 st.markdown('''
-- GPA: `3.39`
 - Research thesis entitled `Perturbative Quantum Gravity with Application in Dark Matter Annihilation`.
 - Best Senior Project Award, The 12th Senior Research Project Competition, organized by the Thai Physics Society.
 ''')
@@ -146,7 +145,7 @@ st.markdown('''
 st.markdown('''
 ## Hand on Academic projects
 ''')
-txt2('Ginzburg-Landau-Wilson theory for strongly correlated systems II: analytic and backreacted results', 'https://doi.org/10.48550/arXiv.2311.01897' )
+txt2('Mean field theory for strongly coupled systems: Holographic approach', 'https://doi.org/10.48550/arXiv.2311.01897' )
 txt2('Photon Signal from Non-interacting Scalar Dark Matter Annihilation','https://iopscience.iop.org/article/10.1088/1742-6596/1380/1/012040')
 
 
