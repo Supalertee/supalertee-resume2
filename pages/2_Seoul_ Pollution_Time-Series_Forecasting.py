@@ -257,6 +257,21 @@ Seoulmod = Seoul.copy()
 Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,7)
 Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
 Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
+Seoulmod.insert(0,"M",Seoulmod["Measurement date"].str.slice(5,7),True)
+Seoulmod.insert(1,"Y",Seoulmod["Measurement date"].str.slice(0,4),True)
+Seoulmod.drop("Measurement date",axis=1,inplace=True)
+A=Seoulmod.drop(["Y"],axis=1).groupby(["Address","M"],as_index = False).mean()
+
+
+with st.spinner("The Mapping plot is generating, please wait"):
+    fig = plt.figure(figsize=(12,5))
+    meandata = A.sort_values(by="PM2.5").drop("M",axis=1).groupby("Address",as_index = False).mean()
+    sns.scatterplot(data=A.sort_values(by="PM2.5"), x = "Address" , y= "PM2.5", hue="PM2.5", palette="icefire", size = "PM2.5")
+    sns.lineplot(data= meandata, x = "Address" , y= "PM2.5", linestyle='--')
+    plt.xticks(rotation=45, fontsize=9)
+    plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+    st.pyplot(fig)
+
 with st.spinner("Cleaning Data"):
     st.dataframe(Seoulmod.head(6))
 
