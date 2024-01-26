@@ -42,7 +42,7 @@ pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
 zf2 = zipfile.ZipFile('./projects/pollution/Seoul.zip') 
 Seoul = pd.read_csv(zf2.open('Measurement_summary.csv'))
 
-def removezero(data):
+def removemissing(data):
     temp = Seoul.iloc[:,5:]  
     Avg = temp.mean()
     temp[temp<0] = np.nan
@@ -51,7 +51,7 @@ def removezero(data):
         Seoul.iloc[:,5:] = temp.iloc[:,0:]  
     return Seoul
 
-removezero(Seoul)
+removemissing(Seoul)
 
 datareading = '''zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
 pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
@@ -154,7 +154,7 @@ def plotgeo() :
                 ax.set_title(" ")
     return f, axes
 
-st.subheader("EDA 1: Averaged Pollution of each year on different districts")
+st.subheader("EDA 1: Average Pollution of each year on different districts")
 with st.spinner("The Mapping plot is generating, please wait"):
     f, axes = plotgeo()
     st.pyplot(f)
@@ -252,8 +252,15 @@ def plot_air_quality(Seoulmod1):
 
 # Assuming Seoulmod1 is your DataFrame
 # Call the function to plot the air quality parameters
+st.subheader('EDA 2: ')
+Seoulmod = Seoul.copy()
+Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,7)
+Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
+Seoulmod = Seoulmod.drop(["Latitude","Longitude","Station code"],axis=1)
+with st.spinner("Cleaning Data"):
+    st.dataframe(Seoulmod.head(6))
 
-st.subheader('EDA 2: Time Series Analysis/ seasonal period evaluation')
+st.subheader('EDA 3: Time Series Analysis/ seasonal period evaluation')
 with st.spinner("The Mapping plot is generating, please wait"):
     f, axes = plot_air_quality(Seoulmod1)
     st.pyplot(f)
