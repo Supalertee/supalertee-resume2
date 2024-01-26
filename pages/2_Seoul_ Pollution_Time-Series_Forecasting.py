@@ -261,7 +261,6 @@ Seoulmod.insert(1,"Y",Seoulmod["Measurement date"].str.slice(0,4),True)
 Seoulmod.drop("Measurement date",axis=1,inplace=True)
 A=Seoulmod.drop(["Y"],axis=1).groupby(["Address","M"],as_index = False).mean()
 
-
 with st.spinner("The Mapping plot is generating, please wait"):
     fig = plt.figure(figsize=(12,5))
     meandata = A.sort_values(by="PM2.5").drop("M",axis=1).groupby("Address",as_index = False).mean()
