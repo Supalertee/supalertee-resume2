@@ -154,7 +154,7 @@ def plotgeo() :
                 ax.set_title(" ")
     return f, axes
 
-st.subheader("EDA 1: Average Pollution of each year on different districts")
+st.subheader("EDA 1: Air quality by different districts")
 with st.spinner("The Mapping plot is generating, please wait"):
     f, axes = plotgeo()
     st.pyplot(f)
@@ -252,7 +252,6 @@ def plot_air_quality(Seoulmod1):
 
 # Assuming Seoulmod1 is your DataFrame
 # Call the function to plot the air quality parameters
-st.subheader('EDA 2: ')
 Seoulmod = Seoul.copy()
 Seoulmod["Measurement date"]=Seoulmod["Measurement date"].str.slice(0,7)
 Seoulmod["Address"]=Seoulmod["Address"].str.split(',').str[2].str.strip()
