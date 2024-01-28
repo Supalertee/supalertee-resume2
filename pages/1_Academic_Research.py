@@ -98,7 +98,7 @@ with tab1:
     st.markdown(''' On can see that the periodic moving appears in the solution of spring system which is well known. However, this simple classical physics\
                 calculation have been discovered for almost 300 years and it is still working well. So, How is this simple concept applied in modern theoretical physics?''')
 
-    st.title('How do we study strongly correlated fermions coupled systems via gravity?')
+    st.title('How do we study strongly correlated fermions coupled systems via gravity? (Very Brief Version)')
 
     st.markdown(''' By following the same concept of the least action principle $\delta S = 0$, we can investigate how particle behave, that is most important \
                 concept. And of course, the model to describe the system is more uniqe and complicated.''')
@@ -168,7 +168,7 @@ with tab1:
         st.image("pictures/scalarSSw2.png")
 
     with col2:
-        st.image("pictures/BxSSw0.png")
+        st.image("pictures/BxSAw0.png")
 
     with col3:
         st.image("pictures/BxySSw0.png")
@@ -176,6 +176,7 @@ with tab1:
     with col4:
         st.image("pictures/BtuSAw0.png")
 
+    
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
@@ -183,18 +184,15 @@ with tab1:
 
     with col2:
         st.image("pictures/ScaledBxySS2.png")
-
+    
     with col3:
-        st.image("pictures/BxySSw0.png")
+        st.image("pictures/BxyAdS4(thin).png")
 
     with col4:
-        st.image("pictures/BxySSw1.png")
-
-    st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
-                32 spectral functions which contain different symmetry and features.''')
-
-    st.image('ClassifiedTable.png', output_format="PNG")
+        st.image("pictures/BxyAdS5(thin).png")
 
 
 with tab2:
+    st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
+                32 spectral functions which contain different symmetry and features.''')
     st.image('ClassifiedTable.png', output_format="PNG")
