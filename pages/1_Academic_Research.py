@@ -224,7 +224,7 @@ with tab1:
         st.image("pictures/BxSSw0.png")
 
     with col2:
-        st.image("pictures/BtuSSw1.png")
+        st.image("pictures/BuxSAw1.png")
 
     with col3:
         st.image("pictures/BxySAw1.png")
