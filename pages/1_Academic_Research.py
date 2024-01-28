@@ -98,9 +98,11 @@ with tab1:
     st.markdown(''' On can see that the periodic moving appears in the solution of spring system which is well known. However, this simple classical physics\
                 calculation have been discovered for almost 300 years and it is still working well. So, How is this simple concept applied in modern theoretical physics?''')
 
-    st.title('How do we study strongly correlated fermions coupled systems via gravity? (Very Brief Version)')
+    st.title('''How do we study strongly correlated fermions coupled systems via gravity?''')
 
-    st.markdown(''' By following the same concept of the least action principle $\delta S = 0$, we can investigate how particle behave, that is most important \
+    st.markdown(''' In this site, I will show just only very very simple concept of my work. If one want to see the full detail please visit , https://doi.org/10.48550/arXiv.2311.01897 ''')
+
+    st.markdown(''' By the way, following the same concept of the least action principle $\delta S = 0$, we can investigate how particle behave, that is most important \
                 concept. And of course, the model to describe the system is more uniqe and complicated.''')
 
     st.latex(r'''
@@ -146,9 +148,10 @@ with tab1:
         we use to solve the spectral function from ` hours / 1 set of parameter ` to `half second`. Additionally, the exact formulas are intutive \
             and can tell use everything that have been hidden in numerical results.''')
 
-    st.header('Holographic Flat-Bands')            
+    st.header('Realization of Various Dimensional Flat-Bands')            
 
-    st.markdown(''' By considering all tensor types of interaction, various dimensional flat bands are realized in some case as follows: ''')
+    st.markdown(''' By considering all tensor types of interaction, We found the pole-type singularity Green's functions. \
+            After considering and classification symmetry, various dimensional flat bands are realized as follows: ''')
 
     st.latex(r'''
     \begin{align*}
@@ -158,8 +161,9 @@ with tab1:
     \text{Tr}\mathbb{G}_{B_{tu}^{(-1)}}^{(SA)} &= -\frac{2}{b}\Big[\frac{ (b+|\boldsymbol{k}|)\sqrt{(b-|\boldsymbol{k}|)^2-\omega^2}+(b-|\boldsymbol{k}|)\sqrt{(b+|\boldsymbol{k}|)^2-\omega^2} }{\omega+ i\epsilon}\Big].
     \end{align*} ''')
 
-    st.markdown(''' As everyone knows, how to best way to communicate and send the message to the world is **_Visualization_**\
-            and this is how the visualization of the equation looks like''')
+    st.markdown(''' The Trace of the Green's function is quite complicated and hard to say what is going on in our fermions systems.\
+        the best way to communicate and send the message to the world is **_Visualization_**. We consider the imaginary part of the trace and then we can clearly\
+        see the spectral functions:''')
 
 
     col1, col2, col3, col4 = st.columns(4)
@@ -190,8 +194,30 @@ with tab1:
 
     with col4:
         st.image("pictures/BxyAdS5(thin).png")
+     
+    url = "https://science.org/doi/10.1126/sciadv.aau0059"
+    st.info(''' One of the evidences of our theoretical prediction by gravity/condensed matter is Extremely flat band in bilayer graphene:
+            check out this: [doi/10.1126/sciadv.aau0059](%s)''' % url) 
+    st.image(
+            "https://science.org/cms/10.1126/sciadv.aau0059/asset/d226a0df-05e6-4552-ba57-cca54bf06eb3/assets/graphic/aau0059-f1.jpeg")
 
 
+    st.header('Realization of Various Dimensional Gap/Semi-Metals')    
+
+    st.markdown(''' No just only pole type Green's function, we also discover **_Branch-cut_** types Green's function which is common type Green's function\
+        appearing in conformal field theory. This type of Green's function show the typical feature of strongly correlated systems. We found that this types of \
+        Green's function can generate gap in various dimension (so far people accept that scalar interaction can generate the gap in holography), which fulfill the AdS/CFT correspondence dictionary.\
+        The example of Green's function are given as follows''')        
+
+    st.latex(r'''
+    \begin{align*}
+    \text{Tr}\mathbb{G}_{M_0}^{(SA)} &= \frac{4\omega}{\sqrt{\boldsymbol{k}^2-\omega^2+M_0^2}},\\
+    \text{Tr}\mathbb{G}_{B_{t}^{(0)}}^{(SS)} &= 2\Big(\frac{b+\omega}{\sqrt{\boldsymbol{k}^2-(b+\omega)^2}}-\frac{b-\omega}{\sqrt{\boldsymbol{k}^2-(b-\omega)^2}}\Big),\\
+    \text{Tr}\mathbb{G}_{B_{tu}^{(-1)}}^{(SS)} &= \frac{2\omega}{\sqrt{(b-|\boldsymbol{k}|)^2-\omega^2}}+\frac{2\omega}{\sqrt{(b+|\boldsymbol{k}|)^2-\omega^2}},\\
+    \text{Tr}\mathbb{G}_{B_{x}^{(0)}}^{(SS)} &=  \frac{2\omega}{\sqrt{(b-k_x)^2+\boldsymbol{k}_\perp^2 -\omega^2}}+\frac{2\omega}{\sqrt{(b+k_x)^2+\boldsymbol{k}_\perp^2 -\omega^2}},\\
+    \text{Tr}\mathbb{G}_{B_{xy}^{(-1)}}^{(SA)} &= \frac{2\omega}{\sqrt{(b-|\boldsymbol{k}|)^2+k_z^2 -\omega^2}}+\frac{2\omega}{\sqrt{(b+|\boldsymbol{k}|)^2+k_z^2 -\omega^2}}.
+    \end{align*} ''')
+    st.markdown(''' The most important realizations of these types of Green's function are superconducting gap and Weyl semi-metals ''')
 with tab2:
     st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
                 32 spectral functions which contain different symmetry and features.''')
