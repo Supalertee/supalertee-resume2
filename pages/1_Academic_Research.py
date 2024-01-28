@@ -165,6 +165,20 @@ with tab1:
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
+        st.image("pictures/scalarSSw2.png")
+
+    with col2:
+        st.image("pictures/BxSSw0.png")
+
+    with col3:
+        st.image("pictures/BxySSw0.png")
+
+    with col4:
+        st.image("pictures/BtuSAw0.png")
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
         st.image("pictures/ScaledBxySS1.png")
 
     with col2:
@@ -175,7 +189,6 @@ with tab1:
 
     with col4:
         st.image("pictures/BxySSw1.png")
-
 
     st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
                 32 spectral functions which contain different symmetry and features.''')
