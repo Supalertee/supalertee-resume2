@@ -217,6 +217,36 @@ with tab1:
     \text{Tr}\mathbb{G}_{B_{x}^{(0)}}^{(SS)} &=  \frac{2\omega}{\sqrt{(b-k_x)^2+\boldsymbol{k}_\perp^2 -\omega^2}}+\frac{2\omega}{\sqrt{(b+k_x)^2+\boldsymbol{k}_\perp^2 -\omega^2}},\\
     \text{Tr}\mathbb{G}_{B_{xy}^{(-1)}}^{(SA)} &= \frac{2\omega}{\sqrt{(b-|\boldsymbol{k}|)^2+k_z^2 -\omega^2}}+\frac{2\omega}{\sqrt{(b+|\boldsymbol{k}|)^2+k_z^2 -\omega^2}}.
     \end{align*} ''')
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.image("pictures/BxSSw0.png")
+
+    with col2:
+        st.image("pictures/BxSSw1.png")
+
+    with col3:
+        st.image("pictures/BxySAw1.png")
+
+    with col4:
+        st.image("pictures/BtSSw1.png")
+
+    
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.image("pictures/ScaledBxySA1.png")
+
+    with col2:
+        st.image("pictures/ScaledBxySA2.png")
+    
+    with col3:
+        st.image("pictures/BxyAdS4(thin).png")
+
+    with col4:
+        st.image("pictures/BxyAdS5(thin).png")
+
     st.markdown(''' The most important realizations of these types of Green's function are superconducting gap and Weyl semi-metals ''')
 with tab2:
     st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
