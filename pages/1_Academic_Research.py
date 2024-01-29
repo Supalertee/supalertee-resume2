@@ -242,10 +242,10 @@ with tab1:
         st.image("pictures/ScaledBxySA2.png")
     
     with col3:
-        st.image("pictures/BxyAdS4(thin).png")
+        st.image("pictures/AdS4Scalar.png")
 
     with col4:
-        st.image("pictures/BxyAdS5(thin).png")
+        st.image("pictures/AdS4BxSSsur.png")
 
     st.markdown(''' The most important realizations of these types of Green's function are superconducting gap and Weyl semi-metals ''')
 with tab2:
