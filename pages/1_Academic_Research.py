@@ -248,6 +248,16 @@ with tab1:
         st.image("pictures/AdS4BxSSsur.png")
 
     st.markdown(''' The most important realizations of these types of Green's function are superconducting gap and Weyl semi-metals ''')
+
+    url1 = "https://doi.org/10.1016/B978-0-444-63314-9.00011-1"
+    st.info(''' One of the duality to traditional condensed matter theory of this type of Holographic Green's function is Wely semimetal and Superconductivity gap:
+            check out this: [doi.org/10.1016/B978-0-444-63314-9.00011-1](%s)''' % url1) 
+    st.image(
+            "https://ars.els-cdn.com/content/image/1-s2.0-B9780444633149000111-f11-01-9780444633149.jpg")
+
+
+    st.markdown(''' However, just only the spectral function is not enough to confirm the duality. So that our on-going work is studying topological properties\
+        in Holography.''')
 with tab2:
     st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
                 32 spectral functions which contain different symmetry and features.''')
