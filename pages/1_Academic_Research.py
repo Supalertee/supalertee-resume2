@@ -46,7 +46,7 @@ def plotting(OS):
     # rerun.
     st.button("Re-run", key=f"button_{OS}")
 
-tab1, tab2, tab3 = st.tabs(["Gravity/Condensed Matter Theorey Duality", "Dog", "Owl"])
+tab1, tab2, tab3 = st.tabs(["Gravity/Condensed Matter Theorey Duality", "Classification Table", "Owl"])
 
 with tab1:
 
@@ -256,8 +256,30 @@ with tab1:
             "https://ars.els-cdn.com/content/image/1-s2.0-B9780444633149000111-f11-01-9780444633149.jpg")
 
 
-    st.markdown(''' However, just only the spectral function is not enough to confirm the duality. So that our on-going work is studying topological properties\
-        in Holography.''')
+    st.markdown(''' However, just only the spectral function is not enough to confirm the duality. So that our on-going work is studying **_topological properties\
+        in Holography_**.''')
+    
+    st.title('''Reliability of Our Holographic Mean Field Theorey''')
+
+    st.markdown('''The reliability of our theory is nuatually to be asked, since the analytic results have done in the probe-limit. What does that mean? \
+        In term of gravity and interaction fields, the probe limit means that we neglect the coupling between the fields and gravity so called **Full backreaction**.\
+              So that these days, reviewers in holography content almost do not trust the probe-limit calculations. For this reason, we also perform the full backreaction calculation \
+                  to support our analytic probe limit results also. ''')
+    
+    st.markdown(''' I will not show here how to derive and the set up of the full backreaction. However, what we get is a complicated system of coupled differntial equations: \
+    in the following example is for the space-like tensor case, which can generate rotational symmetric flat band:
+    ''')
+    st.latex(r'''
+     \begin{align*}
+	\mathcal{B}_{xy}^{''} +\mathcal{B}_{xy}^{'}(\frac{f'}{f}+\frac{\chi^{'}}{2\chi}-\frac{1}{u})
+	-\frac{\mathcal{B}_{xy}}{u}(\frac{f'}{f}+\frac{\chi^{'}}{2\chi}-\frac{1}{u}-\frac{4u^5Q^2\gamma \mathcal{B}_{xy}}{f(1+8u^2\gamma\mathcal{B}_{xy}^2)^2}+\frac{1}{uf}) &= 0,\\
+	f^{'} - \frac{f}{3u} \big(12+u^2(\mathcal{B}_{xy}-u\mathcal{B}_{xy}^{'})^2 \big) -\frac{1}{3}u\mathcal{B}_{xy}^2- \frac{u^5Q^2}{6(1+8u^2\gamma\mathcal{B}_{xy}^2)}+\frac{4}{u} &= 0,\\
+	\chi^{'}+\frac{2}{3}u\chi(\mathcal{B}_{xy}-u\mathcal{B}_{xy}^{'})^2 &= 0,  \\
+	A_t^{'}+\frac{uQ\sqrt{\chi}}{1+8u^2\gamma \mathcal{B}_{xy}^2} &= 0.
+    \end{align*}
+    ''')
+    st.markdown(''' To solve this differential equations, we employ **Shooting method** and full detial is in our paper. By the way, we found the spontaneous symmetry breaking solution, which dual to **_alternative holographic quantization._**\
+         Lovely, what we get is reliable results:  ''')
 with tab2:
     st.markdown(''' From this setup and we have **_16_** types of interaction, 2 of scalars, 8 of vectors, and 6 of tensors, including quantization types, we have \
                 32 spectral functions which contain different symmetry and features.''')
