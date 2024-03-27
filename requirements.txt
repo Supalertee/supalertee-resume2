@@ -10,5 +10,5 @@ matplotlib
 requests
 scikit-learn
 pmdarima
-sqlite3
+# sqlite3
 csv
