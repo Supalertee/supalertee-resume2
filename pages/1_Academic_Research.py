@@ -207,7 +207,7 @@ with tab1:
     st.markdown(''' No just only pole type Green's function, we also discover **_Branch-cut_** types Green's function which is common type Green's function\
         appearing in conformal field theory. This type of Green's function show the typical feature of strongly correlated systems. We found that this types of \
         Green's function can generate gap in various dimension (so far people accept that scalar interaction can generate the gap in holography), which fulfill the AdS/CFT correspondence dictionary.\
-        The example of Green's function are given as follows''')        
+        The example of Green's function are given as followsSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS''')        
 
     st.latex(r'''
     \begin{align*}
