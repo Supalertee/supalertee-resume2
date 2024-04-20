@@ -37,7 +37,7 @@ with tab1:
         and so-on. To answer the question **_How pollution in Seoul behave quantitatively and what are the causes?_**''')
 
     st.markdown("# Data Collection/Cleansing/Exploratory")
-    st.markdown(''' Since pollution is the main problem nowadays, I can find very good sources of South Korea pollution data. So, I decided to select 2 dataset''')
+    st.markdown(''' Since pollution is the mainn problem nowadays, I can find very good sources of South Korea pollution data. So, I decided to select 2 dataset''')
 
     zf1 = zipfile.ZipFile('./projects/pollution/Korea.zip') 
     pollution = pd.read_csv(zf1.open('south-korean-pollution-data.csv'))
